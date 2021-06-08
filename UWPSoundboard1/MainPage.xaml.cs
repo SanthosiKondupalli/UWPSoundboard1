@@ -31,5 +31,20 @@ namespace UWPSoundboard1
         {
 
         }
+
+        private void MenuItems_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ItemGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 }

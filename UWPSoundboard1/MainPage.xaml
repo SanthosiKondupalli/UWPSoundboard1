@@ -9,8 +9,57 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <RelativePanel>
-          
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <RelativePanel Grid.Row="0">
+            <Button Name="Hamburger" RelativePanel.AlignLeftWithPanel="True"
+                    Content="&#xE700;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Height="45"
+                    Width="45"
+                    Click="Hamburger_Click">
+
+            </Button>
+            <Button Name="BackButton" RelativePanel.RightOf="Hamburger"
+                    Content="&#xE0A6;"
+                    FontFamily="Segoe MDL2 Assets"
+                    Height="45"
+                    Width="45"
+                    Click="BackButton_Click">
+            </Button>
         </RelativePanel>
+        <SplitView Grid.Row="1" Name="MySplitView" DisplayMode="CompactOverlay" CompactPaneLength="45" OpenPaneLength="200" >
+            <SplitView.Pane>
+                <ListView  IsItemClickEnabled="True" Name="MenuItems" ItemClick="MenuItems_ItemClick"></ListView>
+                
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <MediaElement Name="SoundElement" AutoPlay="True"/>
+                    <TextBlock Name="CategoryTextBlock" Text="All Sounds" FontSize="20" Grid.Row="0"/>
+                    <GridView Name="ItemGridView" IsItemClickEnabled="True" Grid.Row="1" SelectionMode="None" ItemClick="ItemGridView_ItemClick">
+                        <GridView.ItemTemplate>
+                            <DataTemplate >
+                                <Image Name="MyImage" Height="100" Width="100"/>
+                                
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        
+                    </GridView>
+
+
+
+
+                </Grid>
+            </SplitView.Content>
+            
+            
+        </SplitView>
     </Grid>
 </Page>
