@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UWPSoundboard1"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:model="using:UWPSoundboard1.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -32,21 +32,31 @@
         </RelativePanel>
         <SplitView Grid.Row="1" Name="MySplitView" DisplayMode="CompactOverlay" CompactPaneLength="45" OpenPaneLength="200" >
             <SplitView.Pane>
-                <ListView  IsItemClickEnabled="True" Name="MenuItems" ItemClick="MenuItems_ItemClick"></ListView>
+                <ListView  IsItemClickEnabled="True" Name="MenuItems" ItemClick="MenuItems_ItemClick" ItemsSource="{x:Bind menuItem}">
+                    <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:MenuItem">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Height="35" Width="35" Margin="-10,0,10,0" Source="{x:Bind IconFile}" />
+                            <TextBlock Text="{x:Bind category}" FontSize="18" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
                 
             </SplitView.Pane>
             <SplitView.Content>
-                <Grid>
+                <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <MediaElement Name="SoundElement" AutoPlay="True"/>
                     <TextBlock Name="CategoryTextBlock" Text="All Sounds" FontSize="20" Grid.Row="0"/>
-                    <GridView Name="ItemGridView" IsItemClickEnabled="True" Grid.Row="1" SelectionMode="None" ItemClick="ItemGridView_ItemClick">
+                    <GridView Name="ItemGridView" IsItemClickEnabled="True" Grid.Row="1" SelectionMode="None" ItemClick="ItemGridView_ItemClick"
+                              ItemsSource="{x:Bind sounds}">
                         <GridView.ItemTemplate>
-                            <DataTemplate >
-                                <Image Name="MyImage" Height="100" Width="100"/>
+                            <DataTemplate x:DataType="model:Sound">
+                                <Image Name="MyImage" Height="100" Width="100" Source="{x:Bind ImageLink}"/>
                                 
                             </DataTemplate>
                         </GridView.ItemTemplate>
